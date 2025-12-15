@@ -8,7 +8,7 @@ Sistema de control avanzado para un brazo robótico de 4 grados de libertad. El 
 - **Control remoto**: Interfaz web a través de WiFi (ESP32)
 - **Almacenamiento**: Persistencia de posiciones en EEPROM mediante botón de interrupción
 
-## 🏗️ Arquitectura del Sistema
+##  Arquitectura del Sistema
 
 El proyecto está dividido en dos componentes principales:
 
@@ -27,13 +27,14 @@ El proyecto está dividido en dos componentes principales:
 - Control de sliders y botones desde navegador
 - Modo deep sleep para ahorro de energía
 
-## 🛠️ Requisitos de Hardware
+##  Requisitos de Hardware
 
 ### Arduino (Control Local)
 - Microcontrolador Arduino (ATmega328P o compatible)
-- 4 Servomotores
-- 4 Potenciómetros 10kΩ
+- 4 Servomotores MG90S o similares
+- 4 Potenciómetros 100kΩ
 - 1 Botón de interrupción
+- 1 Botón para cambio entre modos Local/Remoto
 - 1 LED indicador
 - Conexión I2C (SDA/SCL)
 
@@ -43,7 +44,7 @@ El proyecto está dividido en dos componentes principales:
 - Pines I2C configurables (SDA=21, SCL=22)
 - Pines capacitivos para control (T3=15, T4=13)
 
-## 📁 Estructura del Proyecto
+##  Estructura del Proyecto
 
 ```
 Control-Hibrido-de-un-Brazo-Robotico/
@@ -56,26 +57,26 @@ Control-Hibrido-de-un-Brazo-Robotico/
 └── README.md
 ```
 
-## 🔌 Configuración de Pines
+##  Configuración de Pines
 
 ### Arduino
-| Componente | Pines |
-|-----------|-------|
-| Servos | 9, 10, 11, 12 |
-| Potenciómetros | A0, A1, A2, A3 |
-| Botón Interrupción | 2 |
-| Botón Deep Sleep | 3 |
-| LED Indicador | 22 |
+| Componente         | Pines          |
+|--------------------|----------------|
+| Servos             | 9, 10, 11, 12  |
+| Potenciómetros     | A0, A1, A2, A3 |
+| Botón Interrupción | 2              |
+| Botón Deep Sleep   | 3              |
+| LED Indicador      | 22             |
 
 ### ESP32
-| Componente | Pin |
-|-----------|-----|
-| I2C SDA | 21 |
-| I2C SCL | 22 |
-| Touch Control 1 | 15 (T3) |
-| Touch Control 2 | 13 (T4) |
+| Componente         | Pines          |
+|--------------------|----------------|
+| I2C SDA            | 21             |
+| I2C SCL            | 22             |
+| Touch Control 1    | 15 (T3)        |
+| Touch Control 2    | 13 (T4)        |
 
-## 🚀 Instalación y Uso
+##  Instalación y Uso
 
 ### Arduino
 1. Abre `Robot/Robot.ino` en Arduino IDE
@@ -100,7 +101,7 @@ Conecta el Arduino y el ESP32 a través de los pines SDA y SCL:
 - Arduino SCL → ESP32 GPIO 22
 - GND común para ambos dispositivos
 
-## 🎮 Modos de Control
+##  Modos de Control
 
 ### Modo Local (Arduino + Potenciómetros)
 - Gira los potenciómetros para controlar cada servo
@@ -113,7 +114,7 @@ Conecta el Arduino y el ESP32 a través de los pines SDA y SCL:
 - Los valores se envían por I2C al Arduino cada 200ms
 - Presiona el botón web para guardar la posición
 
-## 📊 Características Técnicas
+## Características Técnicas
 
 - **Comunicación I2C**: Dirección 0x08 (configurable)
 - **Filtrado de Ruido**: Filtro de media móvil en lecturas analógicas
@@ -123,34 +124,34 @@ Conecta el Arduino y el ESP32 a través de los pines SDA y SCL:
 - **Watchdog Timer**: Recuperación automática ante bloqueos
 - **Deep Sleep**: Modo de bajo consumo en ESP32
 
-## 📝 Notas Importantes
+##  Notas Importantes
 
 1. **Rango de Ángulos**: Los servos típicamente aceptan rangos de 0-180°
 2. **Calibración**: Ajusta los filtros y valores de potenciómetros según tu hardware
 3. **Sincronización**: El Arduino es maestro en actualizaciones locales, ESP32 es cliente remoto
-4. **Seguridad WiFi**: Cambia las credenciales antes de usar en producción
+4. **Seguridad WiFi**: Cambia las credenciales antes de usar
 
-## 🔧 Solución de Problemas
+##  Solución de Problemas
 
-| Problema | Solución |
-|----------|----------|
-| Servo no responde | Verifica pines de alimentación y conexión I2C |
-| WiFi no conecta | Revisa SSID/contraseña en ESP32.ino |
-| Comunicación I2C falla | Confirma pines SDA/SCL y dirección (0x08) |
-| Lecturas ruidosas | Aumenta el valor de `filterValue` |
-| Arduino se bloquea | El watchdog lo reiniciará automáticamente |
+| Problema               | Solución                                      |
+|------------------------|-----------------------------------------------|
+| Servo no responde      | Verifica pines de alimentación y conexión I2C |
+| WiFi no conecta        | Revisa SSID/contraseña en ESP32.ino           |
+| Comunicación I2C falla | Confirma pines SDA/SCL y dirección (0x08)     |
+| Lecturas ruidosas      | Aumenta el valor de `filterValue`             |
+| Arduino se bloquea     | El watchdog lo reiniciará automáticamente     |
 
-## 📚 Referencias
+##  Referencias
 
 - [Arduino Servo Library](https://www.arduino.cc/en/Reference/Servo)
 - [Wire Library (I2C)](https://www.arduino.cc/en/Reference/Wire)
 - [ESP32 WiFi](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/network/esp_wifi.html)
 
-## 📄 Licencia
+##  Licencia
 
 Proyecto de sistemas embebidos y robótica.
 
 ---
 
-**Autor**: Control Híbrido de Brazo Robótico  
+**Autor**: Raúl Lorenzo Parrado  
 **Última actualización**: Diciembre 2025
